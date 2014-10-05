@@ -1,27 +1,33 @@
 package edu.montclair.cs.game.rockygame;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class MyGame extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
+import edu.montclair.cs.game.hanglers.AssetLoader;
+import edu.montclair.cs.game.screens.GameScreen;
+
+/**
+ * The Class MyGame.
+ */
+public class MyGame extends Game{ 
 	
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.ApplicationListener#create()
+	 */
 	@Override
-	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+	public void create() {
+		Gdx.app.log("RockyGame", "created");
+		AssetLoader.load();
+		setScreen(new GameScreen());
 	}
-
+	
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Game#dispose()
+	 */
 	@Override
-	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+	public void dispose(){
+		super.dispose();
+		AssetLoader.dispose();
 	}
+	
 }
