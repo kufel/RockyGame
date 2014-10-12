@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 
 import edu.montclair.cs.game.hanglers.AssetLoader;
 import edu.montclair.cs.game.screens.GameScreen;
+import edu.montclair.cs.game.screens.MainMenuScreen;
 
 /**
  * The Class MyGame.
@@ -18,7 +19,8 @@ public class MyGame extends Game{
 	public void create() {
 		Gdx.app.log("RockyGame", "created");
 		AssetLoader.load();
-		setScreen(new GameScreen());
+		//setScreen(new GameScreen());
+		setScreen(new MainMenuScreen());
 	}
 	
 	/* (non-Javadoc)

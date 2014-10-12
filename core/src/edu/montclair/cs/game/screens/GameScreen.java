@@ -8,7 +8,6 @@ import edu.montclair.cs.game.gameworld.GameRenderer;
 import edu.montclair.cs.game.gameworld.GameWorld;
 import edu.montclair.cs.game.hanglers.InputHandler;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class GameScreen.
  */
@@ -17,6 +16,7 @@ public class GameScreen implements Screen {
 	private GameWorld world;
 	private GameRenderer renderer;
 	private float runTime;
+	private HUDScreen hud;
 	
 	/**
 	 * Instantiates a new game screen.
@@ -33,6 +33,7 @@ public class GameScreen implements Screen {
 
 		world = new GameWorld(midPointY);
 		renderer = new GameRenderer(world, (int)gameHeight, midPointY);
+		hud = new HUDScreen();
 		
 		Gdx.input.setInputProcessor(new InputHandler(world.getRocky()));
 	}
@@ -44,7 +45,8 @@ public class GameScreen implements Screen {
 	public void render(float delta) {
 		runTime += delta;
 		world.update(delta);
-		renderer.render(runTime);
+		renderer.render(runTime);		
+		hud.render(delta);
 	}
 
 	/* (non-Javadoc)
@@ -53,7 +55,6 @@ public class GameScreen implements Screen {
 	@Override
 	public void resize(int width, int height) {
 		Gdx.app.log("GameScreen", "resizing");
-		
 	}
 
 	/* (non-Javadoc)
@@ -62,7 +63,6 @@ public class GameScreen implements Screen {
 	@Override
 	public void show() {
 		Gdx.app.log("GameScreen", "show called");
-		
 	}
 
 	/* (non-Javadoc)
@@ -71,7 +71,6 @@ public class GameScreen implements Screen {
 	@Override
 	public void hide() {
 		Gdx.app.log("GameScreen", "hide called");
-		
 	}
 
 	/* (non-Javadoc)
@@ -80,7 +79,6 @@ public class GameScreen implements Screen {
 	@Override
 	public void pause() {
 		Gdx.app.log("GameScreen", "pause called");
-		
 	}
 
 	/* (non-Javadoc)
@@ -89,15 +87,12 @@ public class GameScreen implements Screen {
 	@Override
 	public void resume() {
 		Gdx.app.log("GameScreen", "resume called");
-		
 	}
 
 	/* (non-Javadoc)
 	 * @see com.badlogic.gdx.Screen#dispose()
 	 */
 	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-		
+	public void dispose() {		
 	}
 }

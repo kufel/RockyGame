@@ -55,6 +55,13 @@ public class Scrollable {
 	}
 	
 	/**
+	 * Stop.
+	 */
+	public void stop(){
+		velocity.x = 0;
+	}
+	
+	/**
 	 * Checks if is scrool left.
 	 *
 	 * @return true, if is scrool left

@@ -31,6 +31,11 @@ public class GameWorld {
 		Gdx.app.log("GameWorld", "update");
 		rocky.update(delta);
 		scroller.update(delta);
+		
+		if (scroller.collides(rocky)) {
+	        // Clean up on game over
+	        scroller.stop();
+	    }
 	}
 	
 	/**

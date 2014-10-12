@@ -1,15 +1,20 @@
 package edu.montclair.cs.game.gameobjects;
 
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+
+import edu.montclair.cs.game.screens.GameOverScreen;
+
 /**
  * The Class ScrollHandler.
  */
 public class ScrollHandler {
 
 	private Background frontBackground, backBackground;
-	private Car car1, car2,car3;
+	private Car car1, car2, car3;
 	
 	public static final int SCROLL_SPEED = -10;
-	public static final int CAR_GAP = 50;
+	public static final int CAR_GAP = 750;
 	
 	/**
 	 * Instantiates a new scroll handler.
@@ -20,9 +25,9 @@ public class ScrollHandler {
 		frontBackground = new Background(0, yPos, 720, 1280, SCROLL_SPEED);
 		backBackground = new Background(frontBackground.getTiilX(), yPos, 720, 1280, SCROLL_SPEED);
 		
-		car1 = new Car(210, 0, 22, 60, SCROLL_SPEED);
-		car2 = new Car(car1.getTiilX() + CAR_GAP, 0, 22, 70, SCROLL_SPEED);
-		car3 = new Car(car2.getTiilX() + CAR_GAP, 0, 22, 60, SCROLL_SPEED);
+		car1 = new Car(300, 1280-400, 400, 400, SCROLL_SPEED);
+		car2 = new Car(car1.getTiilX() + CAR_GAP, 1280-400, 400, 400, SCROLL_SPEED);
+		car3 = new Car(car2.getTiilX() + CAR_GAP, 1280-400, 400, 400, SCROLL_SPEED);
 	}
 	
 	/**
@@ -55,6 +60,28 @@ public class ScrollHandler {
 		}
 	}
 	
+	/**
+	 * Stop.
+	 */
+	public void stop() {
+		frontBackground.stop();
+		backBackground.stop();
+		car1.stop();
+		car2.stop();
+		car3.stop();
+		((Game)Gdx.app.getApplicationListener()).setScreen(new GameOverScreen());
+	}
+	
+	/**
+	 * Collides.
+	 *
+	 * @param rocky the rocky
+	 * @return true, if successful
+	 */
+	public boolean collides(Rocky rocky){
+		return (car1.collides(rocky) || car2.collides(rocky) || car3.collides(rocky));
+	}
+
 	/**
 	 * Gets the front background.
 	 *

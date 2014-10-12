@@ -1,5 +1,6 @@
 package edu.montclair.cs.game.gameobjects;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -13,6 +14,7 @@ public class Rocky {
 	private float rotation;
 	private int width;
 	private int height;
+	private Rectangle bountingRectangle;
 	
 	/**
 	 * Instantiates a new rocky.
@@ -27,7 +29,8 @@ public class Rocky {
 		this.height = height;
 		position = new Vector2(x, y);
 		velocity = new Vector2(0, 0);
-		acceleration = new Vector2(0, 950);
+		acceleration = new Vector2(0, 1500);
+		bountingRectangle = new Rectangle();
 	}
 	
 	/**
@@ -52,7 +55,7 @@ public class Rocky {
 
 		// Rotate on jump
 		if (velocity.y < 0) {
-			rotation -= 480 * delta;
+			rotation -= 180 * delta;
 			if (rotation < 5) {
 				rotation = 5;
 			}
@@ -60,13 +63,16 @@ public class Rocky {
 
 		// rotate on land
 		if (velocity.y > 0) {
-			rotation += 480 * delta;
+			rotation += 180 * delta;
 			if (rotation > -10) {
 				rotation = -10;
 ;			} else if(position.y > 900){
 				rotation = 2;
 			}
 		}
+		
+		// Set the rectangle position for hit detection
+		bountingRectangle.set(position.x, position.y, 360/2, 640/2);
 	}
 	
 	/**
@@ -119,5 +125,14 @@ public class Rocky {
      */
     public float getRotation(){
     	return rotation;
+    }
+    
+    /**
+     * Gets the hit box.
+     *
+     * @return the hit box
+     */
+    public Rectangle getHitBox(){
+    	return bountingRectangle;
     }
 }

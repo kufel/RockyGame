@@ -11,8 +11,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public class AssetLoader {
 	
-	public static Texture texture, bgTexture, rockyTexture;
-	public static TextureRegion bg, background;
+	public static Texture texture, bgTexture, rockyTexture, carTexture;
+	public static TextureRegion bg, background, car;
 	public static Animation rockyAnimation;
 	public static TextureRegion rockyStep1, rockyStep2, rockyStep3;
 	public static TextureRegion skullUp, skullDown, bar;
@@ -22,18 +22,23 @@ public class AssetLoader {
 	 */
 	public static void load(){
 		
-		texture = new Texture(Gdx.files.internal("data/texture.png"));
+		texture = new Texture(Gdx.files.internal("sprites/texture.png"));
 		texture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
-		bgTexture = new Texture(Gdx.files.internal("data/bg-720x1280.png"));
+		bgTexture = new Texture(Gdx.files.internal("sprites/bg-720x1280.png"));
 		bgTexture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
-		rockyTexture = new Texture(Gdx.files.internal("data/rocky-1440x640.png"));
+		rockyTexture = new Texture(Gdx.files.internal("sprites/rocky-1440x640.png"));
 		rockyTexture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
+		carTexture = new Texture(Gdx.files.internal("sprites/car.png"));
+		carTexture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		
 		bg = new TextureRegion(bgTexture, 0, 0, 720, 1280);
 		bg.flip(false, true);
 		
 		background = new TextureRegion(bgTexture, 0, 0, 720, 1280);
 		background.flip(false, true);
+		
+		car = new TextureRegion(carTexture, 0, 0, 500, 453);
+		car.flip(false, true);
 		
 		rockyStep1 = new TextureRegion(rockyTexture, 0, 0, 360, 640);
 		rockyStep1.flip(false, true);
