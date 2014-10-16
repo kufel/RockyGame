@@ -18,7 +18,7 @@ public class GameWorld {
 	 * Instantiates a new game world.
 	 */
 	public GameWorld(int midpointY){
-		rocky = new Rocky(50, midpointY - 320, 360 / 2, 640 / 2);
+		rocky = new Rocky(50, midpointY + 320, 360 / 2, 640 / 2);
 		scroller = new ScrollHandler(0);
 	}
 
@@ -28,7 +28,7 @@ public class GameWorld {
 	 * @param delta the delta
 	 */
 	public void update(float delta) {
-		Gdx.app.log("GameWorld", "update");
+		//Gdx.app.log("GameWorld", "update");
 		rocky.update(delta);
 		scroller.update(delta);
 		

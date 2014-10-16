@@ -1,8 +1,10 @@
 package edu.montclair.cs.game.hanglers;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 
 import edu.montclair.cs.game.gameobjects.Rocky;
+import edu.montclair.cs.game.screens.HUDScreen;
 
 /**
  * The Class InputHandler.
@@ -10,6 +12,7 @@ import edu.montclair.cs.game.gameobjects.Rocky;
 public class InputHandler implements InputProcessor{
 	
 	public Rocky myRocky;
+	public HUDScreen myHud;
 	
 	/**
 	 * Instantiates a new input handler.
@@ -18,6 +21,7 @@ public class InputHandler implements InputProcessor{
 	 */
 	public InputHandler(Rocky rocky) {
 		myRocky = rocky;
+		myHud = new HUDScreen();
 	}
 
 	/* (non-Javadoc)
@@ -25,7 +29,9 @@ public class InputHandler implements InputProcessor{
 	 */
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		myRocky.onClick();
+		myRocky.onTouchDown();
+		myHud.setTouchDown();
+		myHud.setMousePointer(Gdx.input.getX(), Gdx.input.getY());
 		return false;
 	}
 
@@ -61,7 +67,8 @@ public class InputHandler implements InputProcessor{
 	 */
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
+		myRocky.onTouchUp();
+		myHud.setTouchUp();
 		return false;
 	}
 
@@ -70,7 +77,8 @@ public class InputHandler implements InputProcessor{
 	 */
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		// TODO Auto-generated method stub
+		myHud.setMousePointer(Gdx.input.getX(), Gdx.input.getY());
+		//	myHud.setMousePointer(screenX, screenY);
 		return false;
 	}
 
@@ -79,7 +87,6 @@ public class InputHandler implements InputProcessor{
 	 */
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

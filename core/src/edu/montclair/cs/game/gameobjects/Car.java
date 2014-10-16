@@ -11,8 +11,6 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public class Car extends Scrollable{
 	
-	private Random random;
-	
 	private Rectangle obsticleCar;
 	
 	/**
@@ -26,7 +24,6 @@ public class Car extends Scrollable{
 	 */
 	public Car(float x, float y, int width, int height, float scrollSpeed) {
 		super(x, y, width, height, scrollSpeed);
-		random = new Random();
 		obsticleCar = new Rectangle();
 	}
 	
@@ -49,7 +46,6 @@ public class Car extends Scrollable{
 	@Override
 	public void reset(float newX) {
 		super.reset(newX);
-		//height = random.nextInt(90) + 15;
 	}
 	
 	/**

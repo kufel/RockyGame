@@ -1,5 +1,7 @@
 package edu.montclair.cs.game.gameobjects;
 
+import java.util.Random;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 
@@ -9,12 +11,14 @@ import edu.montclair.cs.game.screens.GameOverScreen;
  * The Class ScrollHandler.
  */
 public class ScrollHandler {
+	
+	private Random random;
 
 	private Background frontBackground, backBackground;
 	private Car car1, car2, car3;
 	
 	public static final int SCROLL_SPEED = -10;
-	public static final int CAR_GAP = 750;
+	public int CAR_GAP = 1250;
 	
 	/**
 	 * Instantiates a new scroll handler.
@@ -22,12 +26,14 @@ public class ScrollHandler {
 	 * @param yPos the y pos
 	 */
 	public ScrollHandler(float yPos){
+		random = new Random();
+		
 		frontBackground = new Background(0, yPos, 720, 1280, SCROLL_SPEED);
 		backBackground = new Background(frontBackground.getTiilX(), yPos, 720, 1280, SCROLL_SPEED);
-		
-		car1 = new Car(300, 1280-400, 400, 400, SCROLL_SPEED);
-		car2 = new Car(car1.getTiilX() + CAR_GAP, 1280-400, 400, 400, SCROLL_SPEED);
-		car3 = new Car(car2.getTiilX() + CAR_GAP, 1280-400, 400, 400, SCROLL_SPEED);
+				
+		car1 = new Car(1500, 1280-300, 300, 300, SCROLL_SPEED);
+		car2 = new Car(car1.getTiilX() + CAR_GAP, 1280-300, 300, 300, SCROLL_SPEED);
+		car3 = new Car(car2.getTiilX() + CAR_GAP, 1280-300, 300, 300, SCROLL_SPEED);
 	}
 	
 	/**
@@ -45,11 +51,14 @@ public class ScrollHandler {
 		
 		// check to see if cars are scrolled left
 		if (car1.isScrolledLeft()) {
-			car1.reset(car3.getTiilX() + CAR_GAP);
+			int gap = random.nextInt(400);
+			car1.reset(car3.getTiilX() + CAR_GAP + gap);
 		} else if (car2.isScrolledLeft()) {
-			car2.reset(car1.getTiilX() + CAR_GAP);
+			int gap = random.nextInt(400);
+			car2.reset(car1.getTiilX() + CAR_GAP + gap);
 		} else if (car3.isScrolledLeft()) {
-			car3.reset(car2.getTiilX() + CAR_GAP);
+			int gap = random.nextInt(400);
+			car3.reset(car2.getTiilX() + CAR_GAP + gap);
 		}
 		
 		// check if backgrounds are scrolled

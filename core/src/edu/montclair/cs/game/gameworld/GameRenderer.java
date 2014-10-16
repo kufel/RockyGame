@@ -17,6 +17,8 @@ import edu.montclair.cs.game.gameobjects.Car;
 import edu.montclair.cs.game.gameobjects.Rocky;
 import edu.montclair.cs.game.gameobjects.ScrollHandler;
 import edu.montclair.cs.game.hanglers.AssetLoader;
+import edu.montclair.cs.game.hanglers.InputHandler;
+import edu.montclair.cs.game.screens.HUDScreen;
 
 /**
  * The Class GameRenderer.
@@ -73,7 +75,7 @@ public class GameRenderer {
 	 * Render.
 	 */
 	public void render(float runTime) {
-		Gdx.app.log("GameRenderer", "render");
+		//Gdx.app.log("GameRenderer", "render");
 
         shapeRenderer.begin(ShapeType.Filled);
 

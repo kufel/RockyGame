@@ -24,8 +24,8 @@ public class Scrollable {
 	 * @param scrollSpeed the scroll speed
 	 */
 	public Scrollable(float x, float y, int width,int height, float scrollSpeed){
-		position = new Vector2(x,y);
-		velocity = new Vector2(scrollSpeed,0);
+		position = new Vector2(x, y);
+		velocity = new Vector2(scrollSpeed, 0);
 		this.width = width;
 		this.height = height;
 		isScrolledLeft = false;

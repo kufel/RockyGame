@@ -3,10 +3,14 @@ package edu.montclair.cs.game.gameobjects;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+import edu.montclair.cs.game.screens.HUDScreen;
+
 /**
  * The Class Rocky.
  */
 public class Rocky {
+	
+	private HUDScreen hud;
 	
 	private Vector2 position;
 	private Vector2 velocity;
@@ -15,7 +19,9 @@ public class Rocky {
 	private int width;
 	private int height;
 	private Rectangle bountingRectangle;
-	
+	private long startTimer, elapsedTime;
+	private boolean isOnGround;
+
 	/**
 	 * Instantiates a new rocky.
 	 *
@@ -29,8 +35,10 @@ public class Rocky {
 		this.height = height;
 		position = new Vector2(x, y);
 		velocity = new Vector2(0, 0);
-		acceleration = new Vector2(0, 1500);
+		acceleration = new Vector2(0, 750);
 		bountingRectangle = new Rectangle();
+		isOnGround = false;
+		hud = new HUDScreen();
 	}
 	
 	/**
@@ -51,6 +59,7 @@ public class Rocky {
 		// Set a floor for rocky
 		if(position.y > 900){
 			position.y = 900;
+			isOnGround = true;
 		}
 
 		// Rotate on jump
@@ -73,13 +82,53 @@ public class Rocky {
 		
 		// Set the rectangle position for hit detection
 		bountingRectangle.set(position.x, position.y, 360/2, 640/2);
+		
+		// update jump indicator
+		int jumpRingIndicator = 0;
+		if (elapsedTime < 75) {
+			jumpRingIndicator = 1;
+		} else if(elapsedTime <= 200){
+			jumpRingIndicator = 2;
+		} else if(elapsedTime <= 250){
+			jumpRingIndicator = 3;
+		}
+		hud.setJumpRingIndicaotr(jumpRingIndicator);
+		jumpRingIndicator = 0;
 	}
 	
 	/**
-	 * On click.
+	 * On touch down.
 	 */
-	public void onClick(){
-		velocity.y = -750;
+	public void onTouchDown(){
+		if (isOnGround) {
+			startTimer = System.currentTimeMillis();
+		}
+	}
+	
+	/**
+	 * On touch up.
+	 */
+	public void onTouchUp(){
+		if (isOnGround) {
+			
+			isOnGround = false;
+			
+			elapsedTime = System.currentTimeMillis() - startTimer;
+			System.out.println("Start Time: " + startTimer);
+			System.out.println("Elapsed Time: " + elapsedTime);
+			
+			if (elapsedTime > 250) {
+				elapsedTime = 250;
+			}
+			System.out.println("Formated Time: " + elapsedTime);
+			
+			int v0 = 950 / 250;
+			int vf = (-1) * (int) (elapsedTime * v0);
+			System.out.println("Vf jump: " + vf);
+			
+			velocity.y = vf;
+			elapsedTime = 0;
+		}
 	}
 	
 	/**
